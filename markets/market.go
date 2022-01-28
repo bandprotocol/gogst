@@ -17,3 +17,19 @@ const (
 	REG
 	POST
 )
+
+func (m MarketStatus) String() string {
+	switch m {
+	case INVALID:
+		return "invalid"
+	case CLOSE:
+		return "close"
+	case PRE:
+		return "pre"
+	case REG:
+		return "reg"
+	case POST:
+		return "post"
+	}
+	return "unknown"
+}
