@@ -9,9 +9,7 @@ import (
 
 func main() {
 	// Returns invalid Invalid stock market
-	fmt.Println(markets.GetMarketStatusByMarket(markets.UNDEFINED))
-
-	status, err := markets.GetMarketStatus("AAPL")
+	status, err := markets.GetMarketStatusByMarket(markets.US_STOCK)
 	if err != nil {
 		log.Fatal(err)
 	}

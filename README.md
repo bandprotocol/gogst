@@ -8,7 +8,7 @@ import "github.com/bandprotocol/gogst/markets"
 
 ...
 
-status, _ := markets.GetMarketStatus("AAPL")
+status, _ := markets.GetMarketStatusByMarket(markets.US_STOCK)
 if status == markets.PRE || status == markets.POST {
     fmt.Println("Extended time")
 } else {
