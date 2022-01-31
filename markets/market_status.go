@@ -3,6 +3,9 @@ package markets
 import (
 	"fmt"
 	"time"
+
+	"github.com/bandprotocol/gogst/holidays"
+	"github.com/bandprotocol/gogst/utils"
 )
 
 var STOCK_BASE = map[string]Market{
@@ -45,11 +48,17 @@ func GetMarketStatusByMarket(stock Market) (MarketStatus, error) {
 	}
 	now := time.Now().In(tz)
 
-	if now.Weekday() == time.Saturday || now.Weekday() == time.Sunday {
+	holiday, earlyCloseTime := holidays.IsHoliday(now)
+	if holiday {
+		marketDetail.CloseRegMarket = earlyCloseTime
+		marketDetail.ClosePostMarket = -1
+	}
+
+	if now.Weekday() == time.Saturday || now.Weekday() == time.Sunday || earlyCloseTime == -1 {
 		return CLOSE, nil
 	}
 
-	d := Time(now.Clock())
+	d := utils.Time(now.Clock())
 	if marketDetail.OpenPreMarket != -1 {
 		if marketDetail.OpenPreMarket <= d && d < marketDetail.OpenRegMarket {
 			return PRE, nil

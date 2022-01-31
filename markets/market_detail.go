@@ -1,6 +1,10 @@
 package markets
 
-import "time"
+import (
+	"time"
+
+	"github.com/bandprotocol/gogst/utils"
+)
 
 type MarketDetail struct {
 	TimeZone        string
@@ -10,11 +14,7 @@ type MarketDetail struct {
 	ClosePostMarket time.Duration
 }
 
-func Time(hour, min, sec int) time.Duration {
-	return time.Duration(hour)*time.Hour + time.Duration(min)*time.Minute + time.Duration(sec)*time.Second
-}
-
 var MARKETS = map[Market]MarketDetail{
-	US_STOCK: {"America/New_York", Time(4, 0, 0), Time(9, 30, 0), Time(16, 0, 0), Time(20, 0, 0)},
-	CA_STOCK: {"America/New_York", -1, Time(9, 30, 0), Time(16, 0, 0), Time(17, 0, 0)},
+	US_STOCK: {"America/New_York", utils.Time(4, 0, 0), utils.Time(9, 30, 0), utils.Time(16, 0, 0), utils.Time(20, 0, 0)},
+	CA_STOCK: {"America/New_York", -1, utils.Time(9, 30, 0), utils.Time(16, 0, 0), utils.Time(17, 0, 0)},
 }
